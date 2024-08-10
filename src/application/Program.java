@@ -27,11 +27,18 @@ public class Program {
 			while (line != null) {
 				String[] fields = line.split(",");
 				line = br.readLine();
+				employees.add(new Employee(fields[0], fields[1], Double.parseDouble(fields[2])));
 			}
 		} catch (IOException e) {
 			System.out.println("Erro:" + e.getMessage());
 		}
-
+		
+		List<Employee> salaryEmployees = employees.stream().sorted((e1, e2) -> e1.getEmail().compareTo(e2.getEmail())).filter(e -> e.getSalary() > 2000).toList();
+		
+		System.out.println("Email do empregados que recebem mais de 2000");
+	
+		salaryEmployees.forEach(e -> System.out.println(e.getEmail()));
+		
 		sc.close();
 
 	}
