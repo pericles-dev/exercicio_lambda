@@ -32,13 +32,20 @@ public class Program {
 		} catch (IOException e) {
 			System.out.println("Erro:" + e.getMessage());
 		}
-		
-		List<Employee> salaryEmployees = employees.stream().sorted((e1, e2) -> e1.getEmail().compareTo(e2.getEmail())).filter(e -> e.getSalary() > 2000).toList();
-		
+
+		List<Employee> salaryEmployees1 = employees.stream().sorted((e1, e2) -> e1.getEmail().compareTo(e2.getEmail()))
+				.filter(e -> e.getSalary() > 2000).toList();
+
 		System.out.println("Email do empregados que recebem mais de 2000");
-	
-		salaryEmployees.forEach(e -> System.out.println(e.getEmail()));
+
+		salaryEmployees1.forEach(e -> System.out.println(e.getEmail()));
+
+		List<Employee>  salaryEmployees2 = employees.stream().filter(e -> e.getName().toUpperCase().charAt(0) == 'M').toList();
 		
+		double sumWages = salaryEmployees2.stream().mapToDouble(e -> e.getSalary()). reduce(0, Double::sum);
+		
+		System.out.println("Soma do salario das pessoas que o nome comeca com 'M': " + sumWages);
+
 		sc.close();
 
 	}
